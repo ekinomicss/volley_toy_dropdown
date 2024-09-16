@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  select {
+    padding: 10px;
+    margin: 20px;
+    font-size: 16px;
+  }
+  
+  .hippo-info {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .hippo-info h2 {
+    margin-bottom: 10px;
+  }
+  
+  .hippo-info p {
+    font-size: 14px;
+    color: #555;
+  }
