@@ -12,7 +12,7 @@ function HomePage() {
 
   return (
     <div>
-      <h1>Baby Hippo Information</h1>
+      <h1 className="main-title">Baby Hippo Viewer</h1>
       <DropdownMenu hippos={hippoData} setSelectedHippo={setSelectedHippo} />
       {selectedHippo && (
         <div className="hippo-info">
