@@ -17,4 +17,8 @@ jobs:
         -d '{
           "deployId": "${{ github.sha }}",
           "deployDetails": "Deployment from ${{ github.ref }} by ${{ github.actor }}"
+<<<<<<< HEAD
         }'
+=======
+        }'
+>>>>>>> 8cc3395f7638e5f42d1418aed4ddbfbcd4e2aa68
