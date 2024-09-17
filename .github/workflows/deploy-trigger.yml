@@ -36,7 +36,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: 'us-east-1'
           APPLICATION_NAME: 'volley'
-          ENVIRONMENT_NAME: 'volley-dev2'
+          ENVIRONMENT_NAME: 'volley-dev4'
           DEPLOY_ID: ${{ github.sha }}
           AWS_ACCOUNT_ID: ${{ env.AWS_ACCOUNT_ID }}
         run: |
@@ -57,5 +57,21 @@ jobs:
             --environment-name $ENVIRONMENT_NAME \
             --version-label $DEPLOY_ID
 
+      - name: Trigger Application Webhook
+        env:
+          ENVIRONMENT_NAME: 'volley-dev4'
+        run: |
+          DEPLOY_URL=$(aws elasticbeanstalk describe-environments --environment-names $ENVIRONMENT_NAME --query "Environments[0].CNAME" --output text)
+          curl -X POST https://$DEPLOY_URL/api/github-webhook \
+            -H "Content-Type: application/json" \
+            -H "X-GitHub-Event: push" \
+            -d '{
+              "after": "${{ github.sha }}",
+              "ref": "${{ github.ref }}",
+              "pusher": {
+                "name": "${{ github.actor }}"
+              }
+            }'
+
       - name: Notify Completion
-        run: echo "Elastic Beanstalk Deployment triggered!"
+        run: echo "Elastic Beanstalk Deployment and Application Webhook triggered!"
