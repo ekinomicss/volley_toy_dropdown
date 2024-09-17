@@ -14,7 +14,4 @@ jobs:
       run: |
         curl -X POST ${{ env.APP_URL }}/api/deploy-trigger \
         -H "Content-Type: application/json" \
-        -d '{
-          "deployId": "${{ github.sha }}",
-          "deployDetails": "Deployment from ${{ github.ref }} by ${{ github.actor }}"
-        }'
+        -d '{}'
