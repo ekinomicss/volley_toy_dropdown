@@ -22,13 +22,13 @@ jobs:
           DEPLOY_ID: ${{ github.sha }}
         run: |
           echo "Zipping application..."
-          zip -r application.zip .
+          zip -r app-c705-240916_221919301636.zip .
 
           echo "Uploading and deploying to Elastic Beanstalk..."
           aws elasticbeanstalk create-application-version \
             --application-name $APPLICATION_NAME \
             --version-label $DEPLOY_ID \
-            --source-bundle S3Bucket=elasticbeanstalk-$AWS_REGION-$AWS_ACCOUNT_ID,S3Key=application.zip
+            --source-bundle S3Bucket=elasticbeanstalk-$AWS_REGION-$AWS_ACCOUNT_ID,S3Key=app-c705-240916_221919301636.zip
 
           aws elasticbeanstalk update-environment \
             --application-name $APPLICATION_NAME \
