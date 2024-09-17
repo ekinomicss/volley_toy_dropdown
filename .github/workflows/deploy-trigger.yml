@@ -1,23 +1,39 @@
-name: Deploy Trigger
+name: Deploy to Elastic Beanstalk
 
 on:
   push:
     branches: [ main ]
 
-
-
 jobs:
   trigger-app:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Trigger application
-      env:
-        APP_URL: ${{ secrets.APP_URL }}
-        DEPLOY_ID: ${{ github.sha }}
-      run: |
-        echo "Triggering deploy at: ${{ env.APP_URL }}/api/deploy"
-        curl -X POST ${{ env.APP_URL }}/api/deploy \
-          -H "Content-Type: application/json" \
-          -d '{"deployId": "${{ env.DEPLOY_ID }}", "deployDetails": "Triggered from GitHub Actions"}' \
-          -v  # Add verbose output
-        echo "Deploy triggered"
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Trigger Elastic Beanstalk Deployment
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: 'us-east-1'  # Change this to your region
+          APPLICATION_NAME: 'volley'  # Replace with your Elastic Beanstalk application name
+          ENVIRONMENT_NAME: 'volley-dev'  # Replace with your Elastic Beanstalk environment name
+          DEPLOY_ID: ${{ github.sha }}
+        run: |
+          echo "Zipping application..."
+          zip -r application.zip .
+
+          echo "Uploading and deploying to Elastic Beanstalk..."
+          aws elasticbeanstalk create-application-version \
+            --application-name $APPLICATION_NAME \
+            --version-label $DEPLOY_ID \
+            --source-bundle S3Bucket=elasticbeanstalk-$AWS_REGION-$AWS_ACCOUNT_ID,S3Key=application.zip
+
+          aws elasticbeanstalk update-environment \
+            --application-name $APPLICATION_NAME \
+            --environment-name $ENVIRONMENT_NAME \
+            --version-label $DEPLOY_ID
+
+      - name: Notify Completion
+        run: echo "Elastic Beanstalk Deployment triggered!"
