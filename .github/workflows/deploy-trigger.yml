@@ -22,7 +22,7 @@ jobs:
           DEPLOY_ID: ${{ github.sha }}
         run: |
           echo "Zipping application..."
-          zip -r app-c705-240916_221919301636.zip .
+          zip -r applicati.zip .
 
           echo "Uploading and deploying to Elastic Beanstalk..."
           aws elasticbeanstalk create-application-version \
