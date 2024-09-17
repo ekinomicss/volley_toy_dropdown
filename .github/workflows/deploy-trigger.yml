@@ -18,17 +18,17 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: 'us-east-1'  # Change this to your region
           APPLICATION_NAME: 'volley'  # Replace with your Elastic Beanstalk application name
-          ENVIRONMENT_NAME: 'volley-dev'  # Replace with your Elastic Beanstalk environment name
+          ENVIRONMENT_NAME: 'volley-dev2'  # Replace with your Elastic Beanstalk environment name
           DEPLOY_ID: ${{ github.sha }}
         run: |
           echo "Zipping application..."
-          zip -r applicati.zip .
+          zip -r application.zip .
 
           echo "Uploading and deploying to Elastic Beanstalk..."
           aws elasticbeanstalk create-application-version \
             --application-name $APPLICATION_NAME \
             --version-label $DEPLOY_ID \
-            --source-bundle S3Bucket=elasticbeanstalk-$AWS_REGION-$AWS_ACCOUNT_ID,S3Key=app-c705-240916_221919301636.zip
+            --source-bundle S3Bucket=elasticbeanstalk-$AWS_REGION-$AWS_ACCOUNT_ID,S3Key=application.zip
 
           aws elasticbeanstalk update-environment \
             --application-name $APPLICATION_NAME \
