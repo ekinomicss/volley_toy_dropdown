@@ -16,5 +16,6 @@ jobs:
         echo "Triggering deploy at: ${{ env.APP_URL }}/api/deploy"
         curl -X POST ${{ env.APP_URL }}/api/deploy \
           -H "Content-Type: application/json" \
-          -d '{"deployId": "${{ env.DEPLOY_ID }}", "deployDetails": "Triggered from GitHub Actions"}'
+          -d '{"deployId": "${{ env.DEPLOY_ID }}", "deployDetails": "Triggered from GitHub Actions"}' \
+          -v  # Add verbose output
         echo "Deploy triggered"
