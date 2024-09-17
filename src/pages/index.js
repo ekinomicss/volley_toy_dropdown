@@ -8,7 +8,7 @@ const Home = ({ dropdownMenu }) => {
     <div>
     <h1 className="main-title">Baby Hippo Fan Club </h1>
 
-    <DropdownMenu>
+    <DropdownMenu
   
     </DropdownMenu>
     </div>
