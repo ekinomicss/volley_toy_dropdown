@@ -2,7 +2,7 @@ name: Deploy Trigger
 
 on:
   push:
-    branches: [ main ]  # Adjust this to your main branch name
+    branches: [ main ]
 
 jobs:
   trigger-app:
@@ -10,11 +10,14 @@ jobs:
     steps:
     - name: Trigger application
       env:
-        APP_URL: ${{ secrets.APP_URL }}  # Add this secret in your GitHub repository settings
+        APP_URL: ${{ secrets.APP_URL }}  # Ensure that APP_URL is being pulled from GitHub secrets
       run: |
+        # Log the URL to verify that it's being set correctly
+        echo "Using URL: ${{ env.APP_URL }}/api/deploy-trigger"
+        
+        # Now trigger the deploy
+        echo "Triggering deploy at: ${{ env.APP_URL }}/api/deploy-trigger"
         curl -X POST ${{ env.APP_URL }}/api/deploy-trigger \
         -H "Content-Type: application/json" \
-        -d '{
-          "deployId": "${{ github.sha }}",
-          "deployDetails": "Deployment from ${{ github.ref }} by ${{ github.actor }}"
-        }'
+        -d '{"deployId": "12345", "deployDetails": "Deploying version 1.0"}'
+        echo "Deploy triggered"
