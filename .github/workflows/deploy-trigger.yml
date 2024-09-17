@@ -13,5 +13,7 @@ jobs:
         APP_URL: ${{ secrets.APP_URL }}
       run: |
         echo "Triggering deploy at: ${{ env.APP_URL }}/api/deploy-trigger"
-        curl -X POST ${{ env.APP_URL }}/api/deploy-trigger
+        curl -X POST ${{ env.APP_URL }}/api/deploy-trigger \
+        -H "Content-Type: application/json" \
+        -d '{"deployId": "12345", "deployDetails": "Deploying version 1.0"}'
         echo "Deploy triggered"
