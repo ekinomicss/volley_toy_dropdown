@@ -5,6 +5,7 @@ on:
     branches: [ main ]
 
 
+
 jobs:
   trigger-app:
     runs-on: ubuntu-latest
