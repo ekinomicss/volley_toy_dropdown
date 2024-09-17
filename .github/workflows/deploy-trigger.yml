@@ -11,7 +11,10 @@ jobs:
     - name: Trigger application
       env:
         APP_URL: ${{ secrets.APP_URL }}
+        DEPLOY_ID: ${{ github.sha }}
       run: |
-        echo "Triggering deploy at: ${{ env.APP_URL }}/api/deploy-trigger"
-        curl -X POST ${{ env.APP_URL }}/api/deploy-trigger
+        echo "Triggering deploy at: ${{ env.APP_URL }}/api/deploy"
+        curl -X POST ${{ env.APP_URL }}/api/deploy \
+          -H "Content-Type: application/json" \
+          -d '{"deployId": "${{ env.DEPLOY_ID }}", "deployDetails": "Triggered from GitHub Actions"}'
         echo "Deploy triggered"
