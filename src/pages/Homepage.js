@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import DropdownMenu from '../components/DropdownMenu';
-import { Brush } from 'd3';
 
 const hippoData = [
   { id: 1, name: 'Baby Fiona', info: 'Fiona is a famous hippo born at the Cincinnati Zoo.' },
@@ -14,7 +13,7 @@ function HomePage() {
   return (
     <div>
       <h1 className="main-title">Baby Hippo Viewer</h1>
-      <bruh hippos={hippoData} setSelectedHippo=setSelectedHippo} />
+      <DropdownMenu hippos={hippoData} setSelectedHippo={setSelectedHippo} />
       {selectedHippo && (
         <div className="hippo-info">
           <h2>{selectedHippo.name}</h2>
