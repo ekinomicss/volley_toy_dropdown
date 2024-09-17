@@ -5,6 +5,9 @@ function DropdownMenu() {
 
   const handleChange = (event) => {
     setSelectedHippo(event.target.value);
+    if (event.target.value === 'moo_deng_1') {
+      nonExistentFunction();
+    }
   };
 
   return (
