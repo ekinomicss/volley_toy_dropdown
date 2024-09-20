@@ -5,7 +5,7 @@
   "description": "A dropdown menu for baby hippos.",
   "main": "index.js",
   "scripts": {
-    "dev": "next app.js > ./logs/app.log 2>&1",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
