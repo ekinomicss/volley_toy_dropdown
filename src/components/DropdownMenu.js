@@ -35,7 +35,7 @@ function DropdownMenu() {
       {selectedHippo === 'moo_deng_2' && (
         <div className="image-container">
           <img 
-            src="/images/moo_deng_1.jpeg" 
+            src="/images/moo_deng_2.jpeg" 
             alt="Moo Deng 2" 
             className="hippo-image"
           />
