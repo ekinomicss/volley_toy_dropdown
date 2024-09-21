@@ -1,7 +1,7 @@
 {
   "name": "babyhippo",
   "version": "1.0.0",
-  "type": "module",  
+  "type": "module",
   "description": "A dropdown menu for baby hippos.",
   "main": "index.js",
   "scripts": {
